@@ -93,4 +93,11 @@ export const LoginSpan = styled.span`
   margin-left: 0.8rem;
 `;
 
+export const Bookmark = styled.img`
+  align-self: flex-end;
+  padding: 0.9rem 1rem;
+  background-color: rgba(16, 20, 30, 0.5);
+  border-radius: 50%;
+`;
+
 export default GlobalStyles;
