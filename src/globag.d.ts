@@ -4,5 +4,5 @@ interface MediaType {
   adult: boolean;
   release_date: string;
   media_type: string;
-  poster_path: string;
+  backdrop_path: string;
 }

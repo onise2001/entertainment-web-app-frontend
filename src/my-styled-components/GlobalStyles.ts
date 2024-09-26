@@ -100,4 +100,24 @@ export const Bookmark = styled.img`
   border-radius: 50%;
 `;
 
+export const Dot = styled.span`
+  width: 0.3rem;
+  height: 0.3rem;
+  background-color: #fff;
+  opacity: 0.5;
+  border-radius: 50%;
+`;
+
+export const InfoSpan = styled.span`
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #fff;
+  opacity: 0.75;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+export const MediaIcon = styled.img``;
+
 export default GlobalStyles;

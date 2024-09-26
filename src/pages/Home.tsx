@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Slider from "../components/Slider";
-import { Bookmark } from "../my-styled-components/GlobalStyles";
+import {
+  Bookmark,
+  Dot,
+  InfoSpan,
+  MediaIcon,
+} from "../my-styled-components/GlobalStyles";
 
 export default function Home() {
   const [recomendations, setRecomendations] = useState<MediaType[]>();
@@ -20,6 +25,7 @@ export default function Home() {
 
       if (response.status === 200) {
         const data = await response.json();
+        console.log(data);
         setRecomendations(data.results);
       }
     };
@@ -41,8 +47,25 @@ export default function Home() {
           <RecomendationsCard key={item.id}>
             <RecomendationBookmark src="/assets/icon-bookmark-empty.svg" />
             <RecomendationsCardImage
-              src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w200${item.backdrop_path}`}
             />
+            <MediaInfoWrapper>
+              <InfoSpan>{item.release_date.split("-")[0]}</InfoSpan>
+              <Dot></Dot>
+              <InfoSpan>
+                {item.media_type === "movie" ? (
+                  <MediaIcon src="/assets/icon-category-movie.svg" />
+                ) : (
+                  <MediaIcon src="/assets/icon-category-tv.svg" />
+                )}
+                {item.media_type.split("")[0].toUpperCase() +
+                  item.media_type.slice(1)}
+              </InfoSpan>
+              <Dot></Dot>
+
+              <InfoSpan>{item.adult ? "18+" : "PG"}</InfoSpan>
+            </MediaInfoWrapper>
+            <MediaTitle>{item.title}</MediaTitle>
           </RecomendationsCard>
         ))}
       </Recomendations>
@@ -98,18 +121,18 @@ const SectionTitle = styled.h2`
 
 const Recomendations = styled.section`
   display: flex;
-
   flex-wrap: wrap;
   gap: 1.5rem;
+  margin-top: 2.4rem;
 `;
 
 const RecomendationsCard = styled.div`
   width: 16.4rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  gap: 0.4rem;
+  cursor: pointer;
 `;
 
 const RecomendationsCardImage = styled.img`
@@ -118,10 +141,23 @@ const RecomendationsCardImage = styled.img`
   border-radius: 8px;
   object-fit: cover;
   object-position: top;
+  margin-bottom: 0.8rem;
 `;
 
 const RecomendationBookmark = styled(Bookmark)`
   position: absolute;
   top: 0.8rem;
   right: 0.8rem;
+`;
+
+const MediaTitle = styled.h2`
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+`;
+
+const MediaInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 `;

@@ -1,15 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <StyledHeader>
       <NavLogo src="/assets/logo.svg" />
       <Navigation>
-        <NavIcon src="/assets/icon-nav-home.svg" />
-        <NavIcon src="/assets/icon-nav-movies.svg" />
-        <NavIcon src="/assets/icon-nav-tv-series.svg" />
-        <NavIcon src="/assets/icon-nav-bookmark.svg" />
+        <Link to="/home">
+          <NavIcon src="/assets/icon-nav-home.svg" />
+        </Link>
+        <Link to="/movies">
+          <NavIcon src="/assets/icon-nav-movies.svg" />
+        </Link>
+        <Link to="/tv-shows">
+          <NavIcon src="/assets/icon-nav-tv-series.svg" />
+        </Link>
+        <Link to="/bookmarks">
+          <NavIcon src="/assets/icon-nav-bookmark.svg" />
+        </Link>
       </Navigation>
       <ProfileIcon src="/assets/image-avatar.png" />
     </StyledHeader>
@@ -39,6 +48,7 @@ const Navigation = styled.nav`
 const NavIcon = styled.img`
   width: 1.6rem;
   height: 1.6rem;
+  cursor: pointer;
 `;
 
 const ProfileIcon = styled.img`

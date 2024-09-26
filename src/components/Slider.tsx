@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Bookmark } from "../my-styled-components/GlobalStyles";
+import { Bookmark, Dot, InfoSpan, MediaIcon } from "../my-styled-components/GlobalStyles";
 
 export default function Slider() {
   const [media, setMedia] = useState<MediaType[]>();
@@ -28,17 +28,26 @@ export default function Slider() {
     <SliderContainer>
       <StyledSlider>
         {media?.map((item) => (
-          <SliderCard key={item.id} $bgImage={item.poster_path}>
+          <SliderCard key={item.id} $bgImage={item.backdrop_path}>
             <Bookmark src="/assets/icon-bookmark-empty.svg" />
             <InfoWrapper>
               <InfoContainer>
                 <ReleaseDateContainer>
-                  <InfoSpan>{item.release_date}</InfoSpan>
+                  <InfoSpan>{item.release_date.split("-")[0]}</InfoSpan>
                   <Dot></Dot>
-                  <InfoSpan>{item.media_type}</InfoSpan>
+                  <InfoSpan>
+                    {item.media_type === "movie" ? (
+                      <MediaIcon src="/assets/icon-category-movie.svg" />
+                    ) : (
+                      <MediaIcon src="/assets/icon-category-tv.svg" />
+                    )}
+                    {item.media_type.split("")[0].toUpperCase() +
+                      item.media_type.slice(1)}
+                  </InfoSpan>
                 </ReleaseDateContainer>
                 <Title>{item.title}</Title>
               </InfoContainer>
+              <Rating>{item.adult ? "18+" : "PG"}</Rating>
             </InfoWrapper>
           </SliderCard>
         ))}
@@ -90,20 +99,8 @@ const ReleaseDateContainer = styled.div`
   gap: 0.8rem;
 `;
 
-const InfoSpan = styled.span`
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: #fff;
-  opacity: 0.75;
-`;
 
-const Dot = styled.span`
-  width: 0.3rem;
-  height: 0.3rem;
-  background-color: #fff;
-  opacity: 0.5;
-  border-radius: 50%;
-`;
+
 
 const Title = styled.span`
   font-size: 1.5rem;
