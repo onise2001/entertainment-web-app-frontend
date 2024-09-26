@@ -1,23 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
+  const location = useLocation();
+  const [page, setPage] = useState<string>("");
+
+  useEffect(() => {
+    setPage(location.pathname.slice(1));
+  });
+
   return (
     <StyledHeader>
-      <NavLogo src="/assets/logo.svg" />
+      <Link to="/home">
+        <NavLogo src="/assets/logo.svg" />
+      </Link>
       <Navigation>
         <Link to="/home">
-          <NavIcon src="/assets/icon-nav-home.svg" />
+          <NavIcon src="/assets/icon-nav-home.svg" $active={page === "home"} />
         </Link>
         <Link to="/movies">
-          <NavIcon src="/assets/icon-nav-movies.svg" />
+          <NavIcon
+            src="/assets/icon-nav-movies.svg"
+            $active={page === "movies"}
+          />
         </Link>
         <Link to="/tv-shows">
-          <NavIcon src="/assets/icon-nav-tv-series.svg" />
+          <NavIcon
+            src="/assets/icon-nav-tv-series.svg"
+            $active={page === "tv-shows"}
+          />
         </Link>
         <Link to="/bookmarks">
-          <NavIcon src="/assets/icon-nav-bookmark.svg" />
+          <NavIcon
+            src="/assets/icon-nav-bookmark.svg"
+            $active={page === "bookmarks"}
+          />
         </Link>
       </Navigation>
       <ProfileIcon src="/assets/image-avatar.png" />
@@ -37,6 +55,7 @@ const StyledHeader = styled.header`
 const NavLogo = styled.img`
   width: 2.5rem;
   height: 2rem;
+  cursor: pointer;
 `;
 
 const Navigation = styled.nav`
@@ -45,10 +64,15 @@ const Navigation = styled.nav`
   gap: 2.5rem;
 `;
 
-const NavIcon = styled.img`
+const NavIcon = styled.img<{ $active: boolean }>`
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;
+  filter: ${({ $active }) =>
+    $active ? " invert(1) brightness(1000%) saturate(0%)" : ""};
+  &:hover {
+    filter: invert(1) brightness(1000%) saturate(0%);
+  }
 `;
 
 const ProfileIcon = styled.img`

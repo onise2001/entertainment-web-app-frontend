@@ -11,6 +11,10 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import MainLayout from "./Layouts/MainLayout";
 import Home from "./pages/Home";
+import Movies from "./pages/Movies";
+import TvShows from "./pages/TvShows";
+import { Bookmark } from "./my-styled-components/GlobalStyles";
+import Bookmarks from "./pages/Bookmarks";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/movies",
+        element: <Movies />,
+      },
+      {
+        path: "/tv-shows",
+        element: <TvShows />,
+      },
+      {
+        path: "/bookmarks",
+        element: <Bookmarks />,
       },
       {
         path: "/",

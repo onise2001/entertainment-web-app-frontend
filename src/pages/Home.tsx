@@ -75,7 +75,7 @@ export default function Home() {
 
 const HomeMain = styled.main`
   background-color: #10141e;
-  padding: 2.4rem 1.6rem 0;
+  padding: 2.4rem 1.6rem 5rem;
   min-height: 100vh;
 `;
 
